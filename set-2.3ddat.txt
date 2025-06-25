@@ -1,0 +1,87 @@
+damp local
+
+define canshu
+;Dolomite 
+    pl_1=0.27
+    el_1=16.7e9
+    Gm_1=el_1/(2+2*pl_1)
+    Km_1=el_1/(3*(1-2*pl_1)) 
+    zon=0.0003    
+    Kn_1=10*(km_1+1.33333*Gm_1)/zon
+    Ks_1=0.5*Kn_1
+    coh_1=6.7e7
+    ten_1=2.6e7
+    fri_1=27
+    fri_res_1=6
+end
+@canshu
+
+change cons 1
+change jcons 1  
+
+change jmat=2 range group 'joint-s';specimen
+
+change mat=3 range group 'plate-bolow'
+change mat=3 range group 'plate-up'
+change mat=2 range group 'sample' ;cylinder material
+prop mat=2 dens 2600 ym 16.9e9 pr 0.27
+prop mat=3 dens 2600 ym 16.9e12 pr 0.27
+
+prop jmat=1 jkn 8e13  jks 4e13
+prop jmat=2 jkn 8e13  jks 4e13  jcohesion 26.5e6 jfri 27 res_fric 6  jten 9.0e6
+
+bound stress 0,-3e6,0 0,0,0 range x 0.0 0.05 y 0.0505 0.0515
+
+bound yvel 0.0 range group 'plate-bolow'
+
+bound zvel 0 range z -0.005 0.01
+
+def saturation_capillary
+   while_stepping
+   bb=(step/10)*10
+   if bb=step then 
+    ci=contact_head
+    loop while ci # 0
+       if c_group(ci)='joint-s' the
+            cxi=c_cx(ci)
+            sat_4=c_extra(ci,1)
+            loop while cxi # 0
+            if cx_y(cxi)>=0.02 & cx_y(cxi)<=0.03  then                
+                     weiyi_c2=cx_ndis(cxi)
+                     p2=cx_group(cxi,2)
+                  if p2 # 'None' then
+                     aper1c=float(p2)*0.00001                     
+                     aper2c=aper1c+weiyi_c2                   
+                     if sat_4 =1 then
+                        cap_=0
+                     endif
+                     if sat_4 #1 then
+                        if sat_4 <0.01 then
+                           sat_4=0.01   
+                        endif
+                           cap_=(sat_4^(-1.6/0.6)-1)^(1/1.6)
+                     endif
+                     if aper2 <= 5*0.0001 then
+;                     if aper2 >= 1*0.000001  then 
+                        cap_1=(5200*0.00001*sat_4*cap_*10000)/aper2c
+                        cx_pp(cxi)=-1*cap_1 
+;                     endif
+                     endif 
+                   endif 
+               endif   
+                  cxi=cx_next(cxi)
+          endloop
+       endif                   
+          ci=c_next(ci)
+    endloop 
+    endif
+end
+@saturation_capillary
+
+cycle 20000
+bound xvel 0.03 range x -0.002 -0.0005  y 0.0252 0.051
+bound xvel -0.03 range x 0.0505 0.0515  y -0.001 0.0248;group 'plate-bolow' 
+
+cycle 852200
+
+

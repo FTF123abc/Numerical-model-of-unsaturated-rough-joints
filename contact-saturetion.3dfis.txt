@@ -1,0 +1,157 @@
+def saturation
+    ci=contact_head
+;
+    array var_c(39387)
+    loop n(1,39387)
+         var_c(n)=urand
+    endloop
+    n=1
+    loop while ci # 0
+          if c_group(ci)='joint-1' th
+            cxi=c_cx(ci)
+            loop while cxi # 0  
+            if cx_y(cxi)>=0.02 & cx_y(cxi)<=0.03  then            
+                                                                                                                                
+;aperture 2um
+                     if var_c(n) >=0.0 then
+                     if var_c(n) < 0.012 then
+                        cx_group(cxi,2)='2'
+                     endif   
+                     endif
+;aperture 3um
+                     if var_c(n) >=0.012 then
+                     if var_c(n) < 0.024 then
+                        cx_group(cxi,2)='3'
+                     endif   
+                     endif
+;aperture 4um
+                     if var_c(n) >=0.024 then
+                     if var_c(n) < 0.041 then
+                        cx_group(cxi,2)='4'
+                     endif   
+                     endif                     
+;aperture 5um
+                     if var_c(n) >=0.041 then
+                     if var_c(n) < 0.066 then
+                        cx_group(cxi,2)='5'
+                     endif   
+                     endif                                                             
+                                                                                                                                             
+;aperture 6um
+                     if var_c(n) >=0.066 then
+                     if var_c(n) < 0.103 then
+                        cx_group(cxi,2)='6'
+                     endif   
+                     endif 
+;aperture 7um
+                     if var_c(n) >=0.103 then
+                     if var_c(n) < 0.159 then
+                        cx_group(cxi,2)='7'
+                     endif   
+                     endif 
+;aperture 7.5um
+                     if var_c(n) >=0.159 then
+                     if var_c(n) < 0.234 then
+                        cx_group(cxi,2)='7.5'
+                     endif   
+                     endif                    
+;aperture 7.6um
+                     if var_c(n) >=0.234 then
+                     if var_c(n) < 0.226 then
+                        cx_group(cxi,2)='7.6'
+                     endif   
+                     endif
+;aperture 8um
+                     if var_c(n) >=0.226 then
+                     if var_c(n) < 0.35 then
+                        cx_group(cxi,2)='8'
+                     endif   
+                     endif
+;aperture 8.5um
+                     if var_c(n) >=0.35 then
+                     if var_c(n) < 0.368 then
+                        cx_group(cxi,2)='8.5'
+                     endif   
+                     endif
+;aperture 8.6um
+                     if var_c(n) >=0.368 then
+                     if var_c(n) < 0.486 then
+                        cx_group(cxi,2)='8.6'
+                     endif   
+                     endif                                                                                                                              
+;aperture 9um                                         
+                     if var_c(n) >=0.486 then
+                     if var_c(n) < 0.635 then
+                        cx_group(cxi,2)='9'
+                     endif   
+                     endif 
+;aperture 10um                                         
+                     if var_c(n) >=0.635 then
+                     if var_c(n) < 0.746 then
+                        cx_group(cxi,2)='10'
+                     endif   
+                     endif 
+;aperture 12um                                         
+                     if var_c(n) >=0.746 then
+                     if var_c(n) < 0.828 then
+                        cx_group(cxi,2)='12'
+                     endif   
+                     endif                                          
+;aperture 14um                   
+                     if var_c(n) >=0.828 then
+                     if var_c(n) < 0.861 then
+                        cx_group(cxi,2)='14'
+                     endif   
+                     endif 
+;aperture 16um                  
+                     if var_c(n) >=0.861 then
+                     if var_c(n) < 0.888 then
+                        cx_group(cxi,2)='16'
+                     endif   
+                     endif
+;aperture 18um                  
+                     if var_c(n) >=0.888 then
+                     if var_c(n) < 0.911 then
+                        cx_group(cxi,2)='18'
+                     endif   
+                     endif 
+;aperture 20um                  
+                     if var_c(n) >=0.911 then
+                     if var_c(n) < 0.929 then
+                        cx_group(cxi,2)='20'
+                     endif   
+                     endif 
+;aperture 30um                  
+                     if var_c(n) >=0.929 then
+                     if var_c(n) < 0.947 then
+                        cx_group(cxi,2)='30'
+                     endif   
+                     endif                     
+;aperture 40um                  
+                     if var_c(n) >=0.947 then
+                     if var_c(n) < 0.964 then
+                        cx_group(cxi,2)='40'
+                     endif   
+                     endif                                                                                                       
+;aperture 50um
+                     if var_c(n) >=0.964 then
+                     if var_c(n) < 0.982 then
+                        cx_group(cxi,2)='50'
+                     endif   
+                     endif 
+;aperture 60um
+                     if var_c(n) >=0.982 then
+                     if var_c(n) <= 1 then
+                        cx_group(cxi,2)='60'
+                     endif   
+                     endif                                                                                            
+                  n=n+1
+                  endif
+                 cxi=cx_next(cxi)
+          endloop 
+          endif
+          ci=c_next(ci)
+    endloop    
+end
+@saturation
+

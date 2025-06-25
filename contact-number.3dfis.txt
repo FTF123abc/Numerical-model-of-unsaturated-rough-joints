@@ -1,0 +1,20 @@
+def crack_state
+  nc=0
+   cpnt_0 = contact_head
+   loop while cpnt_0 # 0
+      if c_group(cpnt_0)='joint-1' then
+      scpnt_0=c_cx(cpnt_0)
+     
+         loop while scpnt_0 # 0 
+              if cx_y(scpnt_0)>=0.02 & cx_y(scpnt_0)<=0.03  then                         
+            nc=nc+1
+            endif
+            scpnt_0=cx_next(scpnt_0)
+            
+         endloop  
+        endif 
+      cpnt_0 = c_next(cpnt_0)
+    endloop
+end
+@crack_state
+list @nc
