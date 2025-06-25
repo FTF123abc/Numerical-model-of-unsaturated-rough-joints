@@ -1,1 +1,2 @@
-# Numerical-model-of-unsaturated-rough-joints
+Numerical-model-of-unsaturated-rough-joints
+In the three-dimensional numerical modeling code (3DEC), the embedded FISH language was employed to construct an unsaturated rock specimen. By controlling the spatially heterogeneous distribution of the aperture of sub-contact between grains, we achieved controlled reconstruction of the specimen's pore structure. Based on capillary theory, a pore water distribution model was established, where random algorithms were applied to assign matric suction values corresponding to different apertures of sub-contact between grains. This approach enables the realization of unsaturated conditions in the specimen at the mesoscopic scale.
